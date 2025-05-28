@@ -1,0 +1,145 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    outline: none;
+    /* border: none; */
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+    width: 100%; /* atau bisa ganti ke ukuran spesifik seperti 1200px */
+    height: 300px; /* ubah sesuai tinggi header yang kamu inginkan */
+    overflow: hidden;
+    position: relative;
+}
+
+.header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover agar tidak distorsi, penuh tanpa merusak rasio */
+    display: block;
+}
+
+/* content */
+.content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 40px;
+}
+
+.book {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 158px;
+    height: 224px;
+    /* overflow: hidden; */
+    position: relative;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.book div {
+    text-align: center;
+}
+
+.book img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover agar tidak distorsi, penuh tanpa merusak rasio */
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease-in-out; /* lebih lama dan lembut */
+    cursor: pointer;
+}
+
+.book img:hover {
+    transform: scale(1.05); /* sedikit membesar */
+}
+
+.book span {
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* modal detil ebook */
+.modal-header {
+    border-bottom: none;
+}
+.modal-footer {
+    border-top: none;
+}
+
+.modal-content-ebook {
+    display: flex;
+    gap: 20px; /* Jarak antar elemen kiri-kanan */
+    flex-wrap: wrap; /* Biar responsif kalau layar kecil */
+}
+
+.modal-img-ebook {
+    flex: 1;
+    max-width: 40%; /* Bisa disesuaikan */
+    position: relative;
+}
+
+.modal-detail-ebook {
+    flex: 2;
+    max-width: 60%; /* Bisa disesuaikan */
+}
+
+.modal-img-ebook img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover agar tidak distorsi, penuh tanpa merusak rasio */
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease-in-out; /* lebih lama dan lembut */
+    cursor: pointer;
+}
+
+/* modal conten */
+/* .modal-detail-ebook {
+    border: 1px solid black;
+} */
+
+.modal-detail-ebook h1 {
+    display: block;
+    color: rgb(26, 24, 24);
+    margin-bottom: 40px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.modal-detail-ebook span {
+    display: block;
+    color: rgb(26, 24, 24);
+    font-size: 30px;
+}
+
+/* Tablet (>= 768px) - 3 cards per row */
+@media (min-width: 768px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Laptop (>= 1024px) - 4 cards per row */
+@media (min-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Desktop-wide (>= 1440px) - 5 cards per row */
+@media (min-width: 1440px) {
+    .container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
