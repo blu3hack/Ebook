@@ -1,0 +1,55 @@
+name: Deploy Laravel to Jagoan Hosting
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, zip
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.REMOTE_PATH }}
+            echo "=== Starting Deployment ==="
+            echo "Current directory: $(pwd)"
+            echo "Current user: $(whoami)"
+
+            echo "=== Git Status ==="
+            git status
+
+            echo "=== Pulling Latest Changes ==="
+            git pull origin main
+
+            echo "=== Installing Dependencies ==="
+            composer install --no-dev --optimize-autoloader --no-interaction
+
+            echo "=== Running Laravel Commands ==="
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            echo "=== Fixing Permissions ==="
+            chmod -R 755 storage bootstrap/cache
+
+            echo "=== Deployment Completed Successfully! ==="
