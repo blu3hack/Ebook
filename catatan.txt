@@ -11,3 +11,9 @@
 ====== langkah-langkh instalasi project =============
 1. composer create-project laravel/laravel:^11 .
 2. composer require laravel/breeze --dev && php artisan breeze:install react
+
+
+======= tambahkan font poppins =======
+1. Buka resources/css/app.css dan tambahkan di paling atas:
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+2. Buka tailwind.config.js: set poppins sebagai font default
