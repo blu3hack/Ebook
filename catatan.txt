@@ -17,3 +17,11 @@
 1. Buka resources/css/app.css dan tambahkan di paling atas:
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 2. Buka tailwind.config.js: set poppins sebagai font default
+
+====== menambahkan sqlite ============
+1. pertama tambahkan variable baru di .env => SQLITE_DATABASE=database/database.sqlite
+2. di config/database.php ubah di bagian sqlite => 'database' => env('SQLITE_DATABASE', database_path('database.sqlite')),
+3. buat migration database seperti biasa.
+4. php artisan migrate --database=sqlite (untuk migrate ke sqlite)
+5. cek dengan tinker (php artisan tinker)
+6. DB::connection('sqlite')->select("SELECT name FROM sqlite_master WHERE type='table';"); (untuk melihat daftar table)
